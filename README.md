@@ -8,11 +8,11 @@
 
 
 ## Get Started
-With [node](https://nodejs.org) and [npm](https://npmjs.org) in your system, and in your project to execute:
+安装 [node](https://nodejs.org) and [npm](https://npmjs.org) 的基础上，在您的项目目录中执行：
 ```bash
 npm install resource-meter --save
 ```
-add to your program
+将resource-meter引入到您的代码中：
 ```js
 var resourceMeter = require('resource-meter')
 ```
@@ -57,14 +57,14 @@ resourceMeter.config({
 });
 ```
 配置参数解释：
-| 参数   | 默认值| 类型 | 说明 | 
-|:-----:|:--:  |:--: |:--: |
-| disk  | true   | bool   |  是否检测硬盘资源信息  | 
-| memery| true  | bool  | 是否检测内存资源信息  | 
-| cpu   | true  | bool   |  是否检测cpu性能信息  | 
-| gpu   | true | bool  | 是否检测gpu资源信息  | 
-| level | '1-10'  | String  | 权重判定等级范围  | 
-| killzero| false | bool  | 是否剔除宕机或无信息的节点  | 
+| 参数  | 默认值| 类型 | 说明 |
+|:----:|:----:|:----:|----:|
+| disk  | true   | bool   |  是否检测硬盘资源信息  |
+| memery| true  | bool  | 是否检测内存资源信息  |
+| cpu   | true  | bool   |  是否检测cpu性能信息  |
+| gpu   | true | bool  | 是否检测gpu资源信息  |
+| level | '1-10'  | String  | 权重判定等级范围  |
+| killzero| false | bool  | 是否剔除宕机或无信息的节点  |
 
 
 ## 异步
