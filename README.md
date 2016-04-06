@@ -23,8 +23,11 @@ var resourceMeter = require('resource-meter')
 
 ### API
 **meter(input)**
+
 *input表示输入的资源池/节点列表*
+
 **config(option)**
+
 *option表示配置参数对象*
 ### input/输入
 resource-meter支持IP地址列表形式的输入:
