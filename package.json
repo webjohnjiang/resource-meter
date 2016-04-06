@@ -1,0 +1,28 @@
+{
+  "name": "resource-meter",
+  "version": "1.0.0",
+  "description": "一个机器计算资源的性能评价器，用于对节点做出性能权重评价。节点需以探针模式运行。",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cuiyongjian/resource-meter.git"
+  },
+  "keywords": [
+    "resource",
+    "ruler",
+    "meter",
+    "evaluate",
+    "performance"
+  ],
+  "author": "cuiyongjian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cuiyongjian/resource-meter/issues"
+  },
+  "homepage": "https://github.com/cuiyongjian/resource-meter#readme"
+}

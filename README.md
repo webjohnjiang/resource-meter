@@ -2,6 +2,7 @@
 
 一个计算资源的性能评价器，用于获取计算节点的实时性能信息，做出权重weight评价。其唯一评价依据就是目标节点的某一时刻的CPU/GPU/MEMERY等资源状态信息。
 
+
 ## Attention
 * 访问不通或无性能信息的节点，其权重会设置为0，resource-meter默认不对其做剔除处理.
 * 默认性能评价结果的权重等级为1-10级，可通过配置参数进行修改。
@@ -17,7 +18,7 @@ npm install resource-meter --save
 var resourceMeter = require('resource-meter')
 ```
 
-## Usage
+## 调用使用方法
 resource-meter支持IP地址列表形式的输入:
 ```
 ['192.168.1.100', '192.168.1.101']
@@ -53,7 +54,8 @@ resourceMeter.config({
     cpu: true,
     gpu: true,
     level: '1-10',
-    killzero: false
+    killzero: false,
+    port:
 });
 ```
 > 配置参数解释：
@@ -66,6 +68,15 @@ resourceMeter.config({
 | gpu     | true  | bool  | 是否检测gpu资源信息      |
 | level   | '1-10'| String| 权重判定等级范围         |
 | killzero| false | bool  | 是否剔除宕机或无信息的节点 |
+| port    | false | bool  | 性能探针的端口  |
+
+
+## 探针模式
+> 探针是用来探测空间、服务器运行状况和PHP信息用的，探针可以实时查看服务器硬盘资源、内存占用、网卡流量、系统负载、服务器时间等信息
+
+```
+npm start
+```
 
 ## 测试
 `npm test`
