@@ -75,7 +75,7 @@ resourceMeter.config({
 * 二次开发扩展接口
 
 ## miscAB
-该模块为[awesome-balancer][AB]项目的动态负载均衡策略提供了支撑。[awesome-balancer][/cuiyongjian/awesome-balancer]是一个包含了基于资源性能动态评价策略的负载均衡器。
+该模块为[awesome-balancer][AB]项目的动态负载均衡策略提供了支撑。[awesome-balancer](/cuiyongjian/awesome-balancer)是一个包含了基于资源性能动态评价策略的负载均衡器。
 
 
 ## license
