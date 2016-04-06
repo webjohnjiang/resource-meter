@@ -67,20 +67,15 @@ resourceMeter.config({
 | level   | '1-10'| String| 权重判定等级范围         |
 | killzero| false | bool  | 是否剔除宕机或无信息的节点 |
 
-
-## 异步
-子进程异步执行,working...
-
-
-
-## 二次开发接口
-working...
-
 ## 测试
 `npm test`
 
-## misc
-该模块为[awesome-balancer][]项目的动态负载均衡策略提供了支撑。
+## TodoList
+* 子进程异步执行;
+* 二次开发扩展接口
+
+## miscAB
+该模块为[awesome-balancer][AB]项目的动态负载均衡策略提供了支撑。[awesome-balancer][/cuiyongjian/awesome-balancer]是一个包含了基于资源性能动态评价策略的负载均衡器。
 
 
 ## license
@@ -88,3 +83,5 @@ This software is free to use under the [MIT](http://opensource.org/licenses/MIT)
 [LICENSE file]: https://github.com/cuiyongjian/resource-meter/blob/master/LICENSE
 
 Copyright © 2016 [cuiyongjian](http://blog.cuiyongjian.com) <cuiyongjian@outlook.com>
+
+[AB]: https://github.com/cuiyongjian/awesome-balancer
