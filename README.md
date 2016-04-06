@@ -18,7 +18,7 @@ npm install resource-meter --save
 var resourceMeter = require('resource-meter')
 ```
 
-## 使用：评价模式
+## 评价模式
 将resource-meter作为依赖可以提供`集群内节点的性能评级`的功能，基于性能评级进行特定的处理可以实现诸如`负载均衡`等特有的功能
 
 ### API

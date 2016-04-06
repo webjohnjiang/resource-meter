@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "一个机器计算资源的性能评价器，用于对节点做出性能权重评价。节点需以探针模式运行。",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "current-processes": "^0.2.1"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "mocha"
