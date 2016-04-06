@@ -18,13 +18,21 @@ npm install resource-meter --save
 var resourceMeter = require('resource-meter')
 ```
 
-## 调用使用方法
+## 使用：评价模式
+将resource-meter作为依赖可以提供`集群内节点的性能评级`的功能，基于性能评级进行特定的处理可以实现诸如`负载均衡`等特有的功能
+
+### API
+**meter(input)**
+*input表示输入的资源池/节点列表*
+**config(option)**
+*option表示配置参数对象*
+### input/输入
 resource-meter支持IP地址列表形式的输入:
-```
+```js
 ['192.168.1.100', '192.168.1.101']
 ```
 或者带权重的IP列表形式：
-```
+```js
 [
     {value: '192.168.1.100', weight: 1},
     {value: '192.168.1.101', weight: 2}
@@ -45,7 +53,7 @@ resultNodes输出如下：
 ```
 其中1和2是根据节点性能做出的权重评价。（默认为1-10级）
 
-## Config
+### option配置参数
 通过config方法可以对resource-meter进行配置：
 ```
 resourceMeter.config({
@@ -55,7 +63,7 @@ resourceMeter.config({
     gpu: true,
     level: '1-10',
     killzero: false,
-    port:
+    port: 8000
 });
 ```
 > 配置参数解释：
@@ -68,17 +76,19 @@ resourceMeter.config({
 | gpu     | true  | bool  | 是否检测gpu资源信息      |
 | level   | '1-10'| String| 权重判定等级范围         |
 | killzero| false | bool  | 是否剔除宕机或无信息的节点 |
-| port    | false | bool  | 性能探针的端口  |
+| port    | false | bool  | 性能探针的连接端口  |
 
 
 ## 探针模式
-> 探针是用来探测空间、服务器运行状况和PHP信息用的，探针可以实时查看服务器硬盘资源、内存占用、网卡流量、系统负载、服务器时间等信息
+> 探针是用来探测空间、服务器运行状况和脚本信息用的，探针可以实时查看服务器硬盘资源、内存占用、网卡流量、系统负载、服务器时间等信息
 
+可通过执行如下命令启动探针模式，探针模式可以指定一个监听端口号(默认为8000)。使用websocket客户端可以获取该探针的信息。
 ```
-npm start
+PORT=xxx npm start
 ```
 
 ## 测试
+resource-meter基于mocha进行单元测试，使用如下命令：
 `npm test`
 
 ## TodoList
