@@ -57,14 +57,14 @@ resourceMeter.config({
 });
 ```
 配置参数解释：
-| 参数  | 默认值| 类型 | 说明 |
-|:----:|:----:|:----:|----:|
-| disk  | true   | bool   |  是否检测硬盘资源信息  |
-| memery| true  | bool  | 是否检测内存资源信息  |
-| cpu   | true  | bool   |  是否检测cpu性能信息  |
-| gpu   | true | bool  | 是否检测gpu资源信息  |
-| level | '1-10'  | String  | 权重判定等级范围  |
-| killzero| false | bool  | 是否剔除宕机或无信息的节点  |
+| 参数     | 默认值 | 类型  | 说明                   |
+|:-------:|:-----:|:-----:|----------------------:|
+| disk    | true  | bool  | 是否检测硬盘资源信息      |
+| memery  | true  | bool  | 是否检测内存资源信息      |
+| cpu     | true  | bool  | 是否检测cpu性能信息      |
+| gpu     | true  | bool  | 是否检测gpu资源信息      |
+| level   | '1-10'| String| 权重判定等级范围         |
+| killzero| false | bool  | 是否剔除宕机或无信息的节点 |
 
 
 ## 异步
@@ -79,7 +79,7 @@ working...
 `npm test`
 
 ## misc
-该模块为<awesome-balancer>项目的动态负载均衡策略提供了支撑。
+该模块为[awesome-balancer][]项目的动态负载均衡策略提供了支撑。
 
 
 ## license
