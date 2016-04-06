@@ -9,6 +9,10 @@
 
 
 ## Get Started
+resource-meter支持两种模式配合使用：分别是评价模式和探针模式。评价模式推荐使用编程方式调用其API，探针模式推荐直接执行命令启动探针伺服器。
+
+> 编程方式的引入方法如下：
+
 安装 [node](https://nodejs.org) and [npm](https://npmjs.org) 的基础上，在您的项目目录中执行：
 ```bash
 npm install resource-meter --save
@@ -16,6 +20,12 @@ npm install resource-meter --save
 将resource-meter引入到您的代码中：
 ```js
 var resourceMeter = require('resource-meter')
+```
+
+> 探针模式则直接clone本代码到您的本地，再执行相关指令即可
+```bash
+git clone git@github.com:cuiyongjian/resource-meter.git
+cd resource-meter && npm start
 ```
 
 ## 评价模式
@@ -85,10 +95,11 @@ resourceMeter.config({
 ## 探针模式
 > 探针是用来探测空间、服务器运行状况和脚本信息用的，探针可以实时查看服务器硬盘资源、内存占用、网卡流量、系统负载、服务器时间等信息
 
-可通过执行如下命令启动探针模式，探针模式可以指定一个监听端口号(默认为8000)。使用websocket客户端可以获取该探针的信息。
+可通过执行如下命令启动探针模式，探针模式可以指定一个监听端口号(默认为8000)。使用resource-meter的评价模式或其他websocket客户端可以获取该探针的信息。
 ```
 PORT=xxx npm start
 ```
+探针模式指定的这个端口号应该与评价模式相一致。
 
 ## 测试
 resource-meter基于mocha进行单元测试，使用如下命令：
