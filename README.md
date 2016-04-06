@@ -74,7 +74,7 @@ resourceMeter.config({
 * 子进程异步执行;
 * 二次开发扩展接口
 
-## miscAB
+## misc
 该模块为[awesome-balancer][AB]项目的动态负载均衡策略提供了支撑。[awesome-balancer][AB]是一个包含了基于资源性能动态评价策略的负载均衡器。
 
 
