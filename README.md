@@ -112,14 +112,18 @@ resource-meter基于mocha进行单元测试，使用如下命令：
 
 
 ## 评价算法
-实时资源负载比： A = loadAverage_Percentage*2 + cpuUsage_Percentage + memUsage_Percentage + diskUsage_Percentage
+实时资源负载比（0%-100%）： A = (loadAverage_Percentage*2 + cpuUsage_Percentage*2 + memUsage_Percentage + diskUsage_Percentage) / 6
 
-整体配置影响因子：B = (vcores*3 + totalMem(GB)\*2 + hasGPU\*2) / (32*3+32(GB)\*2+1*2)
+实时资源负载的权重表示法（0-10）： A/10
 
-资源性能权重评价：
+整体配置的权重因子（0-10）：B = (vcores*3 + totalMem(GB)\*2 + hasGPU\*2) / (32*3+32(GB)\*2+1*2) * 10
+*默认以“32核，32GB，有GPU”为最大配置标准*
+
+资源性能权重评价：Weight = (A*3 + B*1)/4
+*本公式更倾向于认为实时的资源负载对性能具有更大的影响*
 
 > cpuUsage是指的执行探针时100毫秒时间内探测的CPU时间使用率，该参数对于表明CPU的资源利用情况具有指导意义。
-
+node中缺少cpu使用率的算法，本模块参考该文章实现：<https://gist.github.com/bag-man/5570809>
 >
 Load Average是 CPU的Load，它所包含的信息不是CPU的使用率状况，而是在一段时间内CPU正在处理以及等待CPU处理的进程数之和的统计信息，也就是CPU使用队列的长度的统计信息。
 业界一般以如下指标来判断loadAverage参数对系统的影响，故本模块将CPU一分钟内的loadAverage的负载结果[0-5]映射为[0%-100%]作为cpu负载比。
