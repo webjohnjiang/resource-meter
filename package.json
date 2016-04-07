@@ -1,12 +1,15 @@
 {
   "name": "resource-meter",
   "version": "1.0.0",
-  "description": "一个机器计算资源的性能评价器，用于对节点做出性能权重评价。节点需以探针模式运行。",
+  "description": "一个机器计算资源的性能评价器，用于对节点做出性能权重评价。可支持评价模式和探针模式来远程获取节点信息，两种模式分别用作服务端和客户端。",
   "main": "index.js",
   "dependencies": {
-    "current-processes": "^0.2.1"
+    "os-utils": "0.0.14"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  },
   "scripts": {
     "test": "mocha"
   },
