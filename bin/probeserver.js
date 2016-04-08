@@ -5,5 +5,4 @@ probe(function (err, data) {
         console.log(err);
         return;
     }
-    console.log(data);
 });

@@ -3,7 +3,7 @@
 一个计算资源的性能评价器，用于获取计算节点的实时性能信息，做出权重weight评价
 
 ## Attention
-* 访问不通或无性能信息的节点，其权重会设置为0，resource-meter默认不对其做剔除处理.
+* 访问不通或无性能信息的节点，其权重会设置为0，resource-meter默认不对其做剔除处理，如有需要请修改默认参数或自行处置。
 * 默认性能评价结果的权重等级为1-10级，可通过配置参数进行修改。
 * resource-meter仅目前仅适用于Linux平台
 
@@ -11,7 +11,8 @@
 ## Get Started
 resource-meter支持两种模式配合使用：分别是评价模式和探针模式。评价模式推荐使用编程方式调用其API，探针模式推荐直接执行命令启动探针伺服器。
 
-> 编程方式的引入方法如下：
+**编程方式**
+该方式的代码调用方法如下：
 
 安装 [node](https://nodejs.org) and [npm](https://npmjs.org) 的基础上，在您的项目目录中执行：
 ```bash
@@ -22,11 +23,13 @@ npm install resource-meter --save
 var resourceMeter = require('resource-meter')
 ```
 
-> 探针模式则直接clone本代码到您的本地，再执行相关指令即可
+**探针模式**
+该模式一般用来直接当做可执行程序使用。所以直接clone本代码到您的本地，再执行相关指令即可
 ```bash
 git clone git@github.com:cuiyongjian/resource-meter.git
-cd resource-meter && npm start
+cd resource-meter && npm run probe
 ```
+> probe翻译为"探针"
 
 ## 评价模式
 将resource-meter作为依赖可以提供`集群内节点的性能评级`的功能，基于性能评级进行特定的处理可以实现诸如`负载均衡`等特有的功能
@@ -112,7 +115,7 @@ resource-meter基于mocha进行单元测试，使用如下命令：
 
 
 ## 评价算法
-实时资源负载比（0%-100%）： A = (loadAverage_Percentage*2 + cpuUsage_Percentage*2 + memUsage_Percentage + diskUsage_Percentage) / 6
+实时资源负载比（0%-100%）： A = (loadAverage_Percentage*2 + cpuUsage_Percentage*1 + memUsage_Percentage + diskUsage_Percentage) / 6
 
 实时资源负载的权重表示法（0-10）： A/10
 
@@ -120,7 +123,7 @@ resource-meter基于mocha进行单元测试，使用如下命令：
 *默认以“32核，32GB，有GPU”为最大配置标准*
 
 资源性能权重评价：Weight = (A*3 + B*1)/4
-*本公式更倾向于认为实时的资源负载对性能具有更大的影响*
+*本公式更倾向于认为实时的资源负载对性能具有更大的影响，所以其与机器配置的权重比为3：1*
 
 > cpuUsage是指的执行探针时100毫秒时间内探测的CPU时间使用率，该参数对于表明CPU的资源利用情况具有指导意义。
 node中缺少cpu使用率的算法，本模块参考该文章实现：<https://gist.github.com/bag-man/5570809>
