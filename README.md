@@ -131,7 +131,10 @@ metercenter -h
 
 
 ## 评价算法
-实时资源负载比（0%-100%）： A = \(loadAverage_Percentage\*2 + cpuUsage_Percentage\*1 + memUsage_Percentage + diskUsage_Percentage\) / 6
+实时资源负载比（0%-100%）：
+```
+A = (loadAverage_Percentage*2 + cpuUsage_Percentage*1 + memUsage_Percentage + diskUsage_Percentage) / 6
+```
 
 实时资源负载的权重表示法（0-10）： A/10
 
