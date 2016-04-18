@@ -12,7 +12,7 @@
 resource-meter支持两种模式配合使用：分别是评价模式和探针模式。评价模式推荐使用`编程方式`调用其暴漏的meter API，探针模式推荐直接执行命令`npm run probe`启动探针伺服器。
 
 ##探针模式##
-> 探针是用来探测空间、服务器运行状况和脚本信息用的，探针可以实时查看服务器硬盘资源、内存占用、网卡流量、系统负载、服务器时间等信息。
+> probe翻译为"探针". 探针是用来探测空间、服务器运行状况和脚本信息用的，探针可以实时查看服务器硬盘资源、内存占用、网卡流量、系统负载、服务器时间等信息。
 
 > resource-meter的评价模式底层会获取该探针返回的信息，并进行性能权重的计算。
 
@@ -21,7 +21,6 @@ resource-meter支持两种模式配合使用：分别是评价模式和探针模
 git clone git@github.com:cuiyongjian/resource-meter.git
 cd resource-meter && npm run probe
 ```
-> probe翻译为"探针"
 
 当然，如果您想基于本探针进行二次开发，您可以require('resource-meter').probe，我们也暴露了如下接口：
 
