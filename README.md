@@ -3,7 +3,7 @@
 一个计算资源的性能评价器，用于获取计算节点的实时性能信息，做出权重weight评价
 
 ## Attention
-* 访问不通或无性能信息的节点，其权重会设置为0，resource-meter默认不对其做剔除处理，如有需要请修改默认参数或自行处置。
+* 访问不通或无性能信息的节点，其权重会设置为0，resource-meter默认不对其做剔除处理，如有需要请修改配置文件或自行处置。
 * 默认性能评价结果的权重等级为1-10级，可通过配置参数进行修改。
 * resource-meter仅目前仅适用于Linux平台
 
@@ -39,11 +39,11 @@ var resourceMeter = require('resource-meter')
 将resource-meter作为依赖可以提供`集群内节点的性能评级`的功能，基于性能评级并结合您的业务，可以实现诸如`负载均衡`等特有的功能。
 
 ### 评价模式提供的API
-**meter(input)**
+**meter(inputHosts)**
 
-*input表示输入的资源池/节点列表*
+*inputHosts表示输入的资源池/节点列表* 该函数返回一个Promise，请在then中对result做相应的处理。
 
-### input/输入
+### input/输入格式
 resource-meter支持IP地址列表形式的输入:
 ```js
 ['192.168.1.100', '192.168.1.101']
@@ -59,7 +59,10 @@ resource-meter支持IP地址列表形式的输入:
 ```javascript
 var resourceMeter = require('resource-meter');
 var nodes = ['192.168.1.100', '192.168.1.101'];
-var resultNodes = resourceMeter.meter(nodes);
+var resultPromise = resourceMeter.meter(nodes);
+resultPromise.then((resultNodes) = > {
+    console.log(resultNodes);
+})
 ```
 resultNodes输出如下：
 ```
@@ -69,6 +72,24 @@ resultNodes输出如下：
 ]
 ```
 其中1和2是根据节点性能做出的权重评价。（默认为1-10级）
+
+### metercenter
+评价模式我们还提供了一个叫做metercenter的命令行工具，可以作为手工查看集群性能评价信息的工具来使用。
+
+首先进行全局安装
+```
+npm install resource-meter --global
+```
+
+然后执行命令：
+```
+metercenter --hosts host1,host2,host3,host4 --port 8000
+```
+其中--port为可选参数，--hosts为必填参数，表示集群内节点的地址，多个地址用逗号分隔。使用帮助：
+```
+metercenter -h
+```
+
 
 ## config.json配置
 通过本模块根目录下的config.json配置文件可以对resource-meter进行配置：

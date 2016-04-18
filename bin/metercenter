@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+var meter = require('../index').meter;
+var commander = require('commander');
+
+commander.option('-h, --hosts <lang>', 'input your hosts, seperate by comma')
+.option('-p, --port <db>', 'host port')
+.parse(process.argv);
+
+if(commander.hosts) {
+    var hosts = commander.hosts.split(',');
+    if (commander.port) {
+       dometer(hosts, commander.port);
+    }
+    else {
+       dometer(hosts);
+    }
+}
+
+function dometer(hosts, port) {
+    var newhosts = [];
+    hosts.forEach(function (item) {
+        var ele = {value: item};
+        newhosts.push(ele);
+    });
+    var result = meter(newhosts, port);
+    result.then(function (data) {
+        console.log(data);
+    });
+}
+

@@ -8,7 +8,7 @@ var server = http.createServer(function (req, res) {
     });
     if (req.url === '/api') {
         console.log('api 请求');
-        var rel = probe();
+        var rel = probe.info();
         res.end(JSON.stringify(rel));
     }
     else {
