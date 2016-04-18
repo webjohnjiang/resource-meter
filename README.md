@@ -6,19 +6,19 @@
 
 [GetStarted](#get-started)
 
-<探针模式>
+[探针模式](探针模式)
 
-<评价模式>
+[评价模式](评价模式)
 
-<config.json配置>
+[config.json配置](configjson配置)
 
-<评价算法>
+[评价算法](评价算法)
 
-<计划>
+[计划](计划)
 
-<misc>
+[misc](misc)
 
-<license>
+[license](license)
 
 ## Attention
 * 访问不通或无性能信息的节点，其权重会设置为0，resource-meter默认不对其做剔除处理，如有需要请修改配置文件或自行处置。
