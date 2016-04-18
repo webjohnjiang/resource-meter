@@ -131,12 +131,13 @@ metercenter -h
 
 
 ## 评价算法
-实时资源负载比（0%-100%）： A = (loadAverage_Percentage\*2 + cpuUsage_Percentage*1 + memUsage_Percentage + diskUsage_Percentage) / 6
+实时资源负载比（0%-100%）： A = \(loadAverage_Percentage\*2 + cpuUsage_Percentage\*1 + memUsage_Percentage + diskUsage_Percentage\) / 6
 
 实时资源负载的权重表示法（0-10）： A/10
 
-整体配置的权重因子（0-10）：B = (vcores\*3 + totalMem(GB)\*2 + hasGPU \* 2 ) / (32*3+32(GB)\*2+1\*2) * 10
-*默认以“32核，32GB，有GPU”为最大配置标准*
+整体配置的权重因子（0-10）：B = \(vcores\*3 + totalMem\(GB\)\*2 + hasGPU \* 2 \) / (32*3+32\(GB\)\*2+1\*2) \* 10
+
+默认以“32核，32GB，有GPU”为最大配置标准
 
 资源性能权重评价：Weight = (A\*3 + B\*1)/4
 *本公式更倾向于认为实时的资源负载对性能具有更大的影响，所以其与机器配置的权重比为3：1*
