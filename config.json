@@ -1,0 +1,10 @@
+{
+    "disk": false,
+    "diskDir": "/",
+    "memery": true,
+    "port": "8000",
+    "cpu": true,
+    "gpu": false,
+    "level": "1-10",
+    "killzero": false
+}

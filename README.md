@@ -9,21 +9,13 @@
 
 
 ## Get Started
-resource-meter支持两种模式配合使用：分别是评价模式和探针模式。评价模式推荐使用编程方式调用其API，探针模式推荐直接执行命令启动探针伺服器。
+resource-meter支持两种模式配合使用：分别是评价模式和探针模式。评价模式推荐使用`编程方式`调用其暴漏的meter API，探针模式推荐直接执行命令`npm run probe`启动探针伺服器。
 
-**编程方式**
-该方式的代码调用方法如下：
+##探针模式##
+> 探针是用来探测空间、服务器运行状况和脚本信息用的，探针可以实时查看服务器硬盘资源、内存占用、网卡流量、系统负载、服务器时间等信息。
 
-安装 [node](https://nodejs.org) and [npm](https://npmjs.org) 的基础上，在您的项目目录中执行：
-```bash
-npm install resource-meter --save
-```
-将resource-meter引入到您的代码中：
-```js
-var resourceMeter = require('resource-meter')
-```
+> resource-meter的评价模式底层会获取该探针返回的信息，并进行性能权重的计算。
 
-**探针模式**
 该模式一般用来直接当做可执行程序使用。所以直接clone本代码到您的本地，再执行相关指令即可
 ```bash
 git clone git@github.com:cuiyongjian/resource-meter.git
@@ -31,30 +23,39 @@ cd resource-meter && npm run probe
 ```
 > probe翻译为"探针"
 
-## 评价模式
-将resource-meter作为依赖可以提供`集群内节点的性能评级`的功能，基于性能评级进行特定的处理可以实现诸如`负载均衡`等特有的功能
+当然，如果您想基于本探针进行二次开发，您可以require('resource-meter').probe，我们也暴露了如下接口：
 
-### API
+* probe.info()  调用后返回当前机器的当前信息（信息内容基于config.json配置）
+* probe.start(server)  传入一个http server实例，当probe探针启动后获取到第一次机器信息时，会自动启动该server。（端口基于config.json的配置）。您可以在server中自己处理http请求。
+
+## 评价模式
+```bash
+npm install resource-meter --save
+```
+将resource-meter引入到您的代码中：
+```js
+var resourceMeter = require('resource-meter')
+```
+将resource-meter作为依赖可以提供`集群内节点的性能评级`的功能，基于性能评级并结合您的业务，可以实现诸如`负载均衡`等特有的功能。
+
+### 评价模式提供的API
 **meter(input)**
 
 *input表示输入的资源池/节点列表*
 
-**config(option)**
-
-*option表示配置参数对象*
 ### input/输入
 resource-meter支持IP地址列表形式的输入:
 ```js
 ['192.168.1.100', '192.168.1.101']
 ```
-或者带权重的IP列表形式：
+或者带权重的IP列表形式(这里传入的权重值没有任何作用，最终会被resource-meter计算后重写)：
 ```js
 [
     {value: '192.168.1.100', weight: 1},
     {value: '192.168.1.101', weight: 2}
 ]
 ```
-调用meter方法即可获取结果：
+示例：
 ```javascript
 var resourceMeter = require('resource-meter');
 var nodes = ['192.168.1.100', '192.168.1.101'];
@@ -69,10 +70,10 @@ resultNodes输出如下：
 ```
 其中1和2是根据节点性能做出的权重评价。（默认为1-10级）
 
-### option配置参数
-通过config方法可以对resource-meter进行配置：
+## config.json配置
+通过本模块根目录下的config.json配置文件可以对resource-meter进行配置：
 ```
-resourceMeter.config({
+{
     disk: true,
     memery: true,
     cpu: true,
@@ -90,26 +91,18 @@ resourceMeter.config({
 | diskDir | '/'   | String  | 检测哪个目录，默认是根目录，推荐设置为hadoop数据目录    |
 | memery  | true  | bool  | 是否检测内存资源信息                                  |
 | cpu     | true  | bool  | 是否检测cpu性能信息                                  |
-| gpu     | true  | bool  | 是否检测gpu资源信息                                  |
+| gpu     | false  | bool  | 是否检测gpu资源信息                                  |
 | level   | '1-10'| String| 权重判定等级范围                                     |
 | killzero| false | bool  | 是否剔除宕机或无信息的节点                             |
 | port    | 8000 | Number  | 性能探针的连接端口                                   |
 
 
-## 探针模式
-> 探针是用来探测空间、服务器运行状况和脚本信息用的，探针可以实时查看服务器硬盘资源、内存占用、网卡流量、系统负载、服务器时间等信息
-
-可通过执行如下命令启动探针模式，探针模式可以指定一个监听端口号(默认为8000)。使用resource-meter的评价模式或其他websocket客户端可以获取该探针的信息。
-```
-PORT=xxx npm start
-```
-探针模式指定的这个端口号应该与评价模式相一致。
 
 ## 测试
 resource-meter基于mocha进行单元测试，使用如下命令：
 `npm test`
 
-## TodoLista
+## TodoList
 * 子进程异步执行;
 * 二次开发扩展接口
 
@@ -141,8 +134,6 @@ Load Average是 CPU的Load，它所包含的信息不是CPU的使用率状况，
 Based on [Determining free memory on Linux](http://blog.scoutapp.com/articles/2010/10/06/determining-free-memory-on-linux), Free memory = free + buffers + cache
 本实现参考自：http://stackoverflow.com/questions/20578095/node-js-get-actual-memory-usage-as-a-percent
 http://blog.chinaunix.net/uid-24709751-id-3564801.html
-
-
 
 
 ## misc
