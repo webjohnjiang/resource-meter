@@ -17,12 +17,7 @@ if(commander.hosts) {
 }
 
 function dometer(hosts, port) {
-    var newhosts = [];
-    hosts.forEach(function (item) {
-        var ele = {value: item};
-        newhosts.push(ele);
-    });
-    var result = meter(newhosts, port);
+    var result = meter(hosts, port);
     result.then(function (data) {
         console.log(data);
     });

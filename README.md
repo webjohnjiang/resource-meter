@@ -16,7 +16,7 @@ resource-meter支持两种模式配合使用：分别是评价模式和探针模
 
 > resource-meter的评价模式底层会获取该探针返回的信息，并进行性能权重的计算。
 
-该模式一般用来直接当做可执行程序使用，并部署在集群待测节点上面。所以直接clone本代码到您的本地，再执行相关指令即可
+该模式一般用来直接当做可执行程序使用，并部署在集群待测节点上面。所以直接clone本代码到您的本地，再执行相关指令即可. 方法如下：
 ```bash
 git clone git@github.com:cuiyongjian/resource-meter.git
 cd resource-meter && npm run probe
@@ -28,19 +28,22 @@ cd resource-meter && npm run probe
 * probe.start(server)  传入一个http server实例，当probe探针启动后获取到第一次机器信息时，会自动启动该server。（端口基于config.json的配置）。您可以在server中自己处理http请求。
 
 ## 评价模式
+使用方法：
+
+先安装到项目中
 ```bash
 npm install resource-meter --save
 ```
-将resource-meter引入到您的代码中：
+再将resource-meter引入到您的代码中：
 ```js
 var resourceMeter = require('resource-meter')
 ```
-将resource-meter作为依赖可以提供`集群内节点的性能评级`的功能，基于性能评级并结合您的业务，可以实现诸如`负载均衡`等特有的功能。
+按照上述方法将resource-meter作为API依赖，可以提供`集群内节点的性能评级`的功能，将性能评级融入到您的业务当中，就可以实现诸如`负载均衡`等特有的功能。
 
 ### 评价模式提供的API
 **meter(inputHosts)**
 
-*inputHosts表示输入的资源池/节点列表* 该函数返回一个Promise，请在then中对result做相应的处理。
+inputHosts表示输入的资源池/节点列表。 该函数返回一个Promise，请在then中对result做相应的处理。input和result的格式请看下面。
 
 ### input/输入格式
 resource-meter支持IP地址列表形式的输入:
@@ -77,21 +80,23 @@ resultNodes输出如下：
 
 首先进行全局安装
 ```
-npm install resource-meter --global
+[sudo] npm install resource-meter --global
 ```
 
-然后执行命令：
+然后在shell中执行命令：
 ```
 metercenter --hosts host1,host2,host3,host4 --port 8000
 ```
-其中--port为可选参数，--hosts为必填参数，表示集群内节点的地址，多个地址用逗号分隔。使用帮助：
+其中--port为可选参数(默认配置为8000，请根据您节点上部署的探针端口来确定)，--hosts为必填参数，表示集群内节点的地址，多个地址用逗号分隔。使用帮助：
 ```
 metercenter -h
 ```
 
 
 ## config.json配置
-通过本模块根目录下的config.json配置文件可以对resource-meter进行配置：
+通过本模块根目录下的config.json配置文件可以对resource-meter进行配置。他决定了`探针模式`所获取的性能参数以及`评价模式`所得结果的范围等等。
+
+配置文件内容如下：
 ```
 {
     disk: true,
@@ -103,12 +108,12 @@ metercenter -h
     port: 8000
 });
 ```
-> 配置参数解释：
+配置参数解释：
 
 | 参数     | 默认值 | 类型  | 说明                                               |
 |:-------:|:-----:|:-----:|--------------------------------------------------:|
 | disk    | false  | bool  | 是否检测硬盘资源信息，开启后对性能有影响                |
-| diskDir | '/'   | String  | 检测哪个目录，默认是根目录，推荐设置为hadoop数据目录    |
+| diskDir | '/'   | String  | 检测哪个目录，默认是根目录，例如设置hadoop的数据目录    |
 | memery  | true  | bool  | 是否检测内存资源信息                                  |
 | cpu     | true  | bool  | 是否检测cpu性能信息                                  |
 | gpu     | false  | bool  | 是否检测gpu资源信息                                  |
@@ -118,24 +123,22 @@ metercenter -h
 
 
 
-## 测试
-resource-meter基于mocha进行单元测试，使用如下命令：
-`npm test`
-
-## TodoList
+## 计划
 * 子进程异步执行;
 * 二次开发扩展接口
+* resource-meter基于mocha进行单元测试，使用如下命令：
+`npm test`
 
 
 ## 评价算法
-实时资源负载比（0%-100%）： A = (loadAverage_Percentage*2 + cpuUsage_Percentage*1 + memUsage_Percentage + diskUsage_Percentage) / 6
+实时资源负载比（0%-100%）： A = (loadAverage_Percentage\*2 + cpuUsage_Percentage*1 + memUsage_Percentage + diskUsage_Percentage) / 6
 
 实时资源负载的权重表示法（0-10）： A/10
 
-整体配置的权重因子（0-10）：B = (vcores*3 + totalMem(GB)\*2 + hasGPU\*2) / (32*3+32(GB)\*2+1*2) * 10
+整体配置的权重因子（0-10）：B = (vcores\*3 + totalMem(GB)\*2 + hasGPU \* 2 ) / (32*3+32(GB)\*2+1\*2) * 10
 *默认以“32核，32GB，有GPU”为最大配置标准*
 
-资源性能权重评价：Weight = (A*3 + B*1)/4
+资源性能权重评价：Weight = (A\*3 + B\*1)/4
 *本公式更倾向于认为实时的资源负载对性能具有更大的影响，所以其与机器配置的权重比为3：1*
 
 > cpuUsage是指的执行探针时100毫秒时间内探测的CPU时间使用率，该参数对于表明CPU的资源利用情况具有指导意义。
