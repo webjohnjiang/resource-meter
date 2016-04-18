@@ -16,7 +16,7 @@ resource-meter支持两种模式配合使用：分别是评价模式和探针模
 
 > resource-meter的评价模式底层会获取该探针返回的信息，并进行性能权重的计算。
 
-该模式一般用来直接当做可执行程序使用。所以直接clone本代码到您的本地，再执行相关指令即可
+该模式一般用来直接当做可执行程序使用，并部署在集群待测节点上面。所以直接clone本代码到您的本地，再执行相关指令即可
 ```bash
 git clone git@github.com:cuiyongjian/resource-meter.git
 cd resource-meter && npm run probe
