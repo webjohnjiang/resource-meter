@@ -16,6 +16,7 @@ var server = http.createServer(function (req, res) {
     }
     else if (req.url === '/meter') {
         console.log('meter请求');
+        debug(req.socket.address());
         var hosts = req.socket.address().address;
         var port = config.port;
         // hosts不需要指定协议等，系统默认采用http协议，所以上面cmd命令行也不需要用户传入协议。
