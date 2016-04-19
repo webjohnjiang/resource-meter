@@ -24,7 +24,7 @@
 * 访问不通或无性能信息的节点，其权重会设置为0，resource-meter默认不对其做剔除处理，如有需要请修改配置文件或自行处置。
 * 为保持灵活，resource-meter默认不对结果进行排序，请根据自己需要对结果数据自行处理。
 * 默认性能评价结果的权重等级为1-10级，可通过配置参数进行修改。
-* resource-meter仅目前仅适用于Linux平台
+* resource-meter目前仅适用于Linux平台
 
 
 ## Get Started
