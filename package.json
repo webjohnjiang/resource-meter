@@ -16,7 +16,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "probe": "node ./bin/probeserver",
+    "probe": "probeserver",
     "meter": "metercenter"
   },
   "repository": {
