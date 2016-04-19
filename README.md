@@ -163,10 +163,10 @@ runtimeWeight = A/10
 
 整体配置的权重因子physicalWeight（0-10）：
 ```
-physicalWeight = (vcores*3 + totalMem(GB)*2 + hasGPU*2) / (32*3+32(GB)*2 + 1*2) * 10
+physicalWeight = (vcores/32*3 + totalMem/32(GB)*2 + hasGPU/1*2)/7 * 10
 ```
 
-上述基于以“32核，32GB，有GPU”为最大配置标准.
+上述基于以“32核，32GB，有GPU”为最大配置标准. 其中hasGPU的话就将设置为0.8(目前最简陋的办法...).
 
 资源性能权重评价：
 ```
