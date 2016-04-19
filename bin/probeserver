@@ -23,7 +23,6 @@ var server = http.createServer(function (req, res) {
         // hosts不需要指定协议等，系统默认采用http协议，所以上面cmd命令行也不需要用户传入协议。
         var result = meter(hosts, port);
         result.then(function (data) {
-            console.log(data);
             res.end(JSON.stringify(data));
         });
     }

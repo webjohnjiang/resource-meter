@@ -157,22 +157,29 @@ metercenter -h
 ```
 runtimeLoad = (loadAverage_Percentage*2 + cpuUsage_Percentage*1 + memUsage_Percentage + diskUsage_Percentage) / 6
 ```
+loadAverage_Percentage表示CPU平均任务负载率，loadAvg它是操作系统给出的cpu忙绿程度的一个参数，为0-5的数值，本模块根据loadAvg实际效应---在[0-1]的时候变化影响较大，大于1的时候基本上处于高负载状态。将其[0,1]区间线性映射为[0%, 80%]的负载率，(1,5+)映射为(80%,100%]的负载率。
+
+memUsage_Percentage是内存使用率，可通过 空闲内存/总内存 算出。
+
+diskUsage_Percentage是磁盘使用率，可通过待测目录的 已用空间/总空间 算出。
+
 
 实时资源负载的权重表示法runtimeWeight（0-10）：
 ```
-runtimeWeight = A/10
+runtimeWeight = Math.round(((-0.1 * runtimeLoad) + 10));
 ```
+其中runtimeLoad表示实时负载比率
 
 整体配置的权重因子physicalWeight（0-10）：
 ```
-physicalWeight = (vcores/32*3 + totalMem/32(GB)*2 + hasGPU/1*2)/7 * 10
+physicalWeight = (vcores/maxVcores*3 + totalMem/maxTotalMem*2 + hasGPU/1*2)/7 * 10
 ```
 
-上述基于以“32核，32GB，有GPU”为最大配置标准. 其中hasGPU的话就将设置为0.8(目前最简陋的办法...).
+上述maxVcores,maxTotalMem表示集群内最大核数节点的vcores以及最大内存节点的totalMem. 若节点拥有GPU显卡的话，就认为其hasGPU为1，否则为0.8，用来拉高或拉低该节点的权重平均值(目前就用这么最简陋的算法...).
 
-资源性能权重评价：
+资源性能权重评价（0-10）：
 ```
-FinalWeight = (W1*3 + W2*1)/4
+FinalWeight = (runtimeWeight*3 + physicalWeight*1)/4
 ```
 
 FinalWeight公式更倾向于认为实时的资源负载对性能具有更大的影响，所以其与机器配置的权重比为3：1
