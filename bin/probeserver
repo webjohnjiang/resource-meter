@@ -3,6 +3,7 @@ var probe = require('../index').probe;
 var meter = require('../index').meter;
 var config = require('../config');
 var http = require('http');
+var debug = require('debug')('resourceMeter:probeserver');
 
 var server = http.createServer(function (req, res) {
     console.log('请求到来');
