@@ -239,7 +239,7 @@ http://blog.chinaunix.net/uid-24709751-id-3564801.html
 
 
 ## misc
-该模块为[awesome-balancer][AB]项目的动态负载均衡策略提供了支撑。[awesome-balancer][AB]是一个包含了基于资源性能动态评价策略的负载均衡器。
+该模块为[awesome-balancer][AB]项目的动态负载均衡策略[DynamicWeightedEngine]提供了技术支撑。[awesome-balancer][AB]是一个包含了基于资源性能动态评价策略的负载均衡器。
 
 
 ## license
