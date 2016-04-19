@@ -1,7 +1,7 @@
 {
   "name": "resource-meter",
   "version": "1.0.0",
-  "description": "一个机器计算资源的性能评价器，用于对节点做出性能权重评价。可支持评价模式和探针模式来远程获取节点信息，两种模式分别用作服务端和客户端。",
+  "description": "一个机器计算资源的性能评价器",
   "main": "index.js",
   "bin": "./bin/metercenter",
   "dependencies": {
