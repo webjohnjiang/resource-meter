@@ -17,7 +17,7 @@
   "scripts": {
     "test": "mocha",
     "probe": "node ./bin/probeserver",
-    "meter": "node ./bin/metercenter"
+    "meter": "metercenter"
   },
   "repository": {
     "type": "git",
