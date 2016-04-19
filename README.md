@@ -40,9 +40,9 @@ resource-meter支持两种模式配合使用：分别是评价模式和探针模
 git clone git@github.com:cuiyongjian/resource-meter.git
 cd resource-meter && npm run probe
 ```
-配置环境变量DEBUG可以在控制台输出探针调试信息，如DEBUG=state npm run probe
+配置环境变量DEBUG可以在控制台输出探针调试信息，如DEBUG=resourceMeter:* npm run probe
 
-探针启动后，您可以访问 http://节点IP/api 来查看节点的探针输出。也可以访问 http://节点IP/meter 来手工计算该节点的权重。
+探针启动后，您可以访问 http://节点IP/api 来查看节点的探针输出。也可以访问 http://节点IP/meter 来手工查看该节点实时计算出的权重。
 
 探针信息的输出格式如下：
 ```
@@ -127,7 +127,7 @@ resultNodes输出如下：
 其中1和2是根据节点性能做出的权重评价。（默认为1-10级）
 
 ### metercenter
-评价模式我们还提供了一个叫做metercenter的命令行工具，可以作为手工查看集群性能评价信息的工具来使用。
+评价模式我们还提供了一个叫做metercenter的命令行工具，可以作为手工查看集群性能评价信息的工具来使用(评价计算在本地执行)。
 
 首先进行全局安装
 ```
@@ -181,7 +181,7 @@ metercenter -h
 `npm test`
 
 
-## 评价算法
+## 评价算法 原理
 实时资源负载比runtimeLoad（0%-100%）：
 ```
 runtimeLoad = (loadAverage_Percentage*2 + cpuUsage_Percentage*1 + memUsage_Percentage + diskUsage_Percentage) / 6
