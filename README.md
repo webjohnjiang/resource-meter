@@ -22,6 +22,7 @@
 
 ## Attention
 * 访问不通或无性能信息的节点，其权重会设置为0，resource-meter默认不对其做剔除处理，如有需要请修改配置文件或自行处置。
+* 为保持灵活，resource-meter默认不对结果进行排序，请根据自己需要对结果数据自行处理。
 * 默认性能评价结果的权重等级为1-10级，可通过配置参数进行修改。
 * resource-meter仅目前仅适用于Linux平台
 
@@ -39,6 +40,7 @@ resource-meter支持两种模式配合使用：分别是评价模式和探针模
 git clone git@github.com:cuiyongjian/resource-meter.git
 cd resource-meter && npm run probe
 ```
+配置环境变量DEBUG可以在控制台输出探针调试信息，如DEBUG=state npm run probe
 
 当然，如果您想基于本探针进行二次开发，您可以require('resource-meter').probe，我们也暴露了如下接口：
 
@@ -149,19 +151,19 @@ metercenter -h
 
 
 ## 评价算法
-实时资源负载比A（0%-100%）：
+实时资源负载比runtimeLoad（0%-100%）：
 ```
-A = (loadAverage_Percentage*2 + cpuUsage_Percentage*1 + memUsage_Percentage + diskUsage_Percentage) / 6
-```
-
-实时资源负载的权重表示法W1（0-10）：
-```
-W1 = A/10
+runtimeLoad = (loadAverage_Percentage*2 + cpuUsage_Percentage*1 + memUsage_Percentage + diskUsage_Percentage) / 6
 ```
 
-整体配置的权重因子B（0-10）：
+实时资源负载的权重表示法runtimeWeight（0-10）：
 ```
-W2 = (vcores*3 + totalMem(GB)*2 + hasGPU*2) / (32*3+32(GB)*2 + 1*2) * 10
+runtimeWeight = A/10
+```
+
+整体配置的权重因子physicalWeight（0-10）：
+```
+physicalWeight = (vcores*3 + totalMem(GB)*2 + hasGPU*2) / (32*3+32(GB)*2 + 1*2) * 10
 ```
 
 上述基于以“32核，32GB，有GPU”为最大配置标准.
