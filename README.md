@@ -139,7 +139,7 @@ metercenter -h
 | memery  | true  | bool  | 是否检测内存资源信息                                  |
 | cpu     | true  | bool  | 是否检测cpu性能信息                                  |
 | gpu     | false  | bool  | 是否检测gpu资源信息                                  |
-| level   | '1-10'| String| 权重判定等级范围                                     |
+| level   | '1-10'| String| 权重判定等级范围【本版本不可修改，因为没有实现！】          |
 | killzero| false | bool  | 是否剔除宕机或无信息的节点                             |
 | port    | 8000 | Number  | 性能探针的连接端口                                   |
 
