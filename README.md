@@ -43,7 +43,7 @@ cd resource-meter && npm run probe
 ```
 配置环境变量DEBUG可以在控制台输出探针调试信息，如DEBUG=resourceMeter:* npm run probe
 
-探针启动后，您可以访问 http://节点IP/api 来查看节点的探针输出。也可以访问 http://节点IP/meter 来手工查看该节点实时计算出的权重。
+探针启动后，您可以访问 http://节点IP/api 来查看节点的探针输出。也可以访问 http://节点IP/meter 来手工查看该节点实时计算出的权重(由于单节点的计算时其硬件配置没有可比性，所以该权重没有太大参考价值)。
 
 探针信息的输出格式如下：
 ```
