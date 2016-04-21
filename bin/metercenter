@@ -2,7 +2,7 @@
 var meter = require('../index').meter;
 var commander = require('commander');
 
-commander.option('-h, --hosts <lang>', 'input your hosts, seperate by comma')
+commander.option('-hh, --hosts <lang>', 'input your hosts, seperate by comma')
 .option('-p, --port <db>', 'host port')
 .parse(process.argv);
 
