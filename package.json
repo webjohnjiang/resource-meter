@@ -1,6 +1,6 @@
 {
   "name": "resource-meter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "一个机器计算资源的性能评价器",
   "main": "index.js",
   "bin": "./bin/metercenter",
