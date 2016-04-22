@@ -39,7 +39,8 @@ resource-meter的评价模式底层其实通过http去获取该探针返回的�
 探针模式一般用来直接当做可执行程序使用，并部署在集群待测节点上面。所以直接clone本代码到您的本地，再执行相关指令即可. 方法如下：
 ```bash
 git clone git@github.com:cuiyongjian/resource-meter.git
-cd resource-meter && npm run probe
+cd resource-meter && npm install
+npm run probe
 ```
 配置环境变量DEBUG可以在控制台输出探针调试信息，如DEBUG=resourceMeter:* npm run probe
 
