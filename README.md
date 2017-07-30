@@ -1,6 +1,6 @@
 # resource-meter
 
-一个计算资源的性能评价器，用于获取计算节点的实时性能信息，做出权重weight评价
+一个计算资源的性能评价器(a performance evaluator)，用于获取计算节点的实时性能信息，做出权重weight评价
 
 [注意](#attention)
 
